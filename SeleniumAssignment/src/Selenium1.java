@@ -10,8 +10,8 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 public class Selenium1 {
 
 	public static void main(String[] args) throws InterruptedException {
-		// TODO Auto-generated method stub
-
+		
+		//Melakukan setup pada Browser Chrome
 		WebDriverManager.chromedriver().setup();
 		WebDriver driver = new ChromeDriver();
 		
