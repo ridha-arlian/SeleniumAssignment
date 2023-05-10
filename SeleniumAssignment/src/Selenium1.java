@@ -1,4 +1,5 @@
 import org.openqa.selenium.By;
+import org.openqa.selenium.By.ByClassName;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,20 +11,28 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 public class Selenium1 {
 
 	public static void main(String[] args) throws InterruptedException {
-		
-		//Melakukan setup pada Browser Chrome
+		// TODO Auto-generated method stub
+
 		WebDriverManager.chromedriver().setup();
 		WebDriver driver = new ChromeDriver();
 		
-		//Input text pada field Username
-		driver.get("http://the-internet.herokuapp.com/login");
-		WebElement username=driver.findElement(By.cssSelector("[id='username']"));
-		username.sendKeys("TommmmSmith");
+		//Mendapatkan halaman website dan menjalankannya
+		driver.get("https://stackoverflow.com/users/login");
+		
+		//Menerima penggunaan cookie
+		Thread.sleep(10000);
+		WebElement cookies=driver.findElement(By.className("js-accept-cookies"));
+		cookies.click();
+		
+		//Melakukan inout pada field Email
+		Thread.sleep(1000);
+		WebElement email=driver.findElement(By.id("email"));
+		email.sendKeys("yanwarholll@gmail.com");
 		
 		//Memilih semua kata sebelumnya dan menghapusnya
-		Thread.sleep(2500);
+		Thread.sleep(1000);
 		Actions actions = new Actions (driver);
-		actions.click(driver.findElement(By.cssSelector("[id='username']")))
+		actions.click(driver.findElement(By.id("email")))
 		.keyDown(Keys.CONTROL)
 		.sendKeys("a")
 		.keyUp(Keys.CONTROL)
@@ -31,21 +40,35 @@ public class Selenium1 {
 		.build()
 		.perform();
 		
-		//Melakukan kembali input data username pada field
-		WebElement username2=driver.findElement(By.cssSelector("[id='username']"));
-		username2.sendKeys("tomsmith");
-		
-		//Meng-input password pada field
-		WebElement password=driver.findElement(By.cssSelector("[id='password']"));
-		password.sendKeys("SuperSecretPassword!");
+		//Melakukan input email kembali pada field
+		Thread.sleep(500);
+		WebElement email1=driver.findElement(By.id("email"));
+		email1.sendKeys("yanwarholl@gmail.com");
+				
+		//Melakukan input password pada field
+		Thread.sleep(500);
+		WebElement password=driver.findElement(By.id("password"));
+		password.sendKeys("qwerty1234");
 		
 		//Melakukan Enter agar submit login dilakukan
-		WebElement login=driver.findElement(By.cssSelector("[type='submit']"));
-		login.sendKeys(Keys.ENTER);
+		Thread.sleep(500);
+		WebElement login=driver.findElement(By.id("submit-button"));
+		login.click();
 		
-		//Melakukan proses logout dengan meng-click
-		WebElement logout=driver.findElement(By.cssSelector("[href='/logout']"));
+		//Menekan tombol icon burger pada halaman
+		Thread.sleep(500);
+		WebElement burger=driver.findElement(By.className("iconStackExchange"));
+		burger.click();
+		
+		//Melakukan proses logout dengan menekan tombol logout
+		Thread.sleep(500);
+		WebElement logout=driver.findElement(By.xpath("//a[@class='js-gps-track'][normalize-space()='log out']"));
 		logout.click();
+		
+		//Melakukan proses logout dengan menekan tombol logout
+		Thread.sleep(500);
+		WebElement moreLogout=driver.findElement(By.xpath("//button[@class='flex--item s-btn s-btn__primary']"));
+		moreLogout.click();
 	}
 
 }
